@@ -23,7 +23,7 @@ module tb ();
   wire [7:0] uio_oe;
 
   // Replace tt_um_example with your module name:
-  tt_um_example user_project (
+  tt_um_ALU_DECODERS user_project (
 
       // Include power ports for the Gate Level test:
 `ifdef GL_TEST
@@ -40,5 +40,36 @@ module tb ();
       .clk    (clk),      // clock
       .rst_n  (rst_n)     // not reset
   );
-
+//Generate stimulus for the inputs
+   initial begin
+    //Default Verification
+    #1; 
+    #1; ui_in [7:5] = 3'b111; ui_in [4:2] = 3'b111;
+    //Octal Decoder
+    #1; ui_in [1:0] = 2'd0; uio_in[7] = 1'b0;
+    #1; ui_in [1:0] = 2'd1;
+    #1; ui_in [1:0] = 2'd2;
+    #1; ui_in [1:0] = 2'd3;
+    //Gray Decoder
+    #1; ui_in [1:0] = 2'd0; uio_in[7] = 1'b1;
+    #1; ui_in [1:0] = 2'd1;
+    #1; ui_in [1:0] = 2'd2;
+    #1; ui_in [1:0] = 2'd3;
+    // New numbers as Input
+    #1; ui_in [7:5] = 3'b101; ui_in [4:2] = 3'b011;
+    //Octal Decoder
+    #1; ui_in [1:0] = 2'd0; uio_in[7] = 1'b0;
+    #1; ui_in [1:0] = 2'd1;
+    #1; ui_in [1:0] = 2'd2;
+    #1; ui_in [1:0] = 2'd3;
+    //Gray Decoder
+    #1; ui_in [1:0] = 2'd0; uio_in[7] = 1'b1;
+    #1; ui_in [1:0] = 2'd1;
+    #1; ui_in [1:0] = 2'd2;
+    #1; ui_in [1:0] = 2'd3;
+      
+    //Parar simulación
+    #100;
+    $stop;
+    end
 endmodule
